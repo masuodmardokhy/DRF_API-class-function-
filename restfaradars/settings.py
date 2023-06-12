@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'myapp',
     'employee',
     'car',
+    'user',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -78,12 +79,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'restfaradars.wsgi.application'
 
 
+# RENDERER = ('rest_framework.renderers.JSONRender',)  # for change browser API
+# if DEBUG:
+#     RENDERER +=('rest_framework.renderers.BrowsableAPIRenderer',)
+
+
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     'rest_framework.authentication.SessionAuthentication'),
 
-    'DEFAULT_PERMISSION_CLASS':('rest_framework.permissions.IsAdminUser',
+    'DEFAULT_PERMISSION_CLASS':( #'rest_framework.permissions.IsAdminUser',
                                 'rest_framework.permissions.IsAuthenticated'),     # کسی که احراز هویت شده و یا ادمین است و سطح دسترسی داره حالا میتونه از API ها استفاده کنه
 
     'DEFAULT_FILTER_BACKENDS':('django_filters.rest_framework.DjangoFilterBackend',     # for search and order in browser API
@@ -91,7 +98,9 @@ REST_FRAMEWORK = {
                                    'rest_framework.filters.OrderingFilter'),
 
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',   # we can use LimitOffset instead of PageNumber
-                                'PAGE_SIZE': 2
+                                'PAGE_SIZE': 2 ,
+
+    # 'DEFAULT_RENDERER_CLASSES':RENDERER   # for change browser API , line82
 }
 
 # Database
